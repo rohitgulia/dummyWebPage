@@ -1,4 +1,4 @@
-## Run 'npm install' and then 'npm start' to run the app
+## Run 'npm install' and then 'npm start' to start the app
 
 ## Available Scripts
 

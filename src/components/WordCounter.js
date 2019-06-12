@@ -11,13 +11,36 @@ import {
 
 export default function WordCounter() {
   const [wordCount, setWordCount] = useState(0);
-  const [showResult, setShowResult] = useState(false);
+  const [showResult, setShowResult] = useState(true);
+  const [currentText, setCurrentText] = useState("");
 
   const handleChange = event => {
-    setShowResult(false);
-    const data = event.target.value.replace(/\s/g, "");
-    setWordCount(data.length);
+    //setShowResult(false);
+    setCurrentText(event.target.value);
+
+    const data = event.target.value.toLowerCase().split(" ");
+    let map = new Map();
+    for (let word of data) {
+      map.set(word, 1);
+    }
+    setWordCount(map.size);
+
+    //const data = event.target.value.replace(/\s/g, "");
+    // const data = event.target.value.split(' ');
+    // setWordCount(data.length);
   };
+
+  const handleFormSubmit = event => {
+    setShowResult(true);
+    const data = currentText.toLowerCase().split(" ");
+
+    let map = new Map();
+    for (let word of data) {
+      map.set(word, 1);
+    }
+    setWordCount(map.size);
+  };
+
   return (
     <div>
       <Container textAlign="center">
@@ -27,7 +50,7 @@ export default function WordCounter() {
           Word Counter
         </Header>
         <Segment attached>
-          <Form onSubmit={() => setShowResult(true)}>
+          <Form onSubmit={handleFormSubmit}>
             <Form.Field>
               <Input
                 focus
